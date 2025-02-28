@@ -2,7 +2,7 @@ vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>cF', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>ch', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -26,7 +26,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
-
 vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
 
 vim.lsp.config('*', {

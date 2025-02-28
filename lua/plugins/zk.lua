@@ -1,10 +1,9 @@
 return {
   {
     'zk-org/zk-nvim',
+    ft = 'markdown',
     config = function()
-      require('zk').setup {
-        picker = 'snacks_picker',
-      }
+      require('zk').setup()
     end,
     keys = {
       { '<leader>zn', "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", desc = 'new note' },

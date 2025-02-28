@@ -63,11 +63,8 @@ local miniplug = function()
     cursorword = true,
     hipatterns = true,
     icons = true,
-    jump = true,
-    jump2d = true,
     move = true,
     pairs = true,
-    surround = true,
   }
   local plugs = {}
   for k, v in pairs(enabled) do

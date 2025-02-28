@@ -13,11 +13,14 @@ vim.api.nvim_create_autocmd('FileType', {
 
 return {
   'nvim-treesitter/nvim-treesitter',
+  lazy = false,
   event = { 'BufReadPost', 'BufNewFile' },
-  opts = {
-    highlight = { enable = true },
-    indent = { enable = true },
-  },
+  config = function()
+    require('nvim-treesitter.configs').setup {
+      highlight = { enable = true },
+      indent = { enable = true },
+    }
+  end,
   cond = function()
     return vim.api.nvim_buf_line_count(0) < 10000
   end,

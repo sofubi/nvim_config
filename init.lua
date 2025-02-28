@@ -11,8 +11,8 @@ vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
 vim.o.splitright = true
 
-vim.o.colorcolumn = '80'
-vim.o.textwidth = 79
+vim.o.colorcolumn = '120'
+vim.o.textwidth = 119
 vim.o.wrap = false
 
 vim.o.foldcolumn = '1'
@@ -52,7 +52,7 @@ vim.o.ignorecase = true
 vim.o.inccommand = 'split'
 vim.o.smartcase = true
 
-vim.o.expandtab = false
+vim.o.expandtab = true
 vim.o.shiftround = true
 vim.o.shiftwidth = 4
 vim.o.smartindent = true
@@ -92,6 +92,8 @@ vim.opt.timeoutlen = 300
 
 vim.o.grepprg = [[rg --glob "!.git" --no-heading --vimgrep --follow $*]]
 vim.opt.grepformat = vim.opt.grepformat ^ { '%f:%l:%c:%m' }
+
+vim.o.clipboard = 'unnamedplus'
 
 if vim.fn.has 'mac' == 1 then
   vim.g.python3_host_prog = '/usr/local/bin/python3'
