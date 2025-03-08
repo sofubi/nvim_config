@@ -4,7 +4,6 @@ return {
     config = function()
       require('lint').linters_by_ft = {
         markdown = { 'markdownlint' },
-        python = { 'mypy' },
       }
       vim.api.nvim_create_autocmd({ 'InsertEnter', 'InsertLeave', 'BufEnter', 'BufWritePost', 'TextChanged', 'TextChangedI' }, {
         callback = function()

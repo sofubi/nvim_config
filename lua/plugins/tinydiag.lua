@@ -10,7 +10,7 @@ return {
         options = {
           show_source = true,
           multilines = {
-            enabled = true,
+            enabled = false,
             always_show = false,
           },
           break_line = {

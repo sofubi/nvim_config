@@ -6,7 +6,7 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
-      preset = 'lazy',
+      preset = 'obsidian',
       latex = {
         enabled = false,
       },

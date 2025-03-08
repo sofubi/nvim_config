@@ -88,7 +88,7 @@ vim.opt.mouse = 'a'
 vim.opt.cursorline = true
 vim.opt.updatetime = 250
 
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 
 vim.o.grepprg = [[rg --glob "!.git" --no-heading --vimgrep --follow $*]]
 vim.opt.grepformat = vim.opt.grepformat ^ { '%f:%l:%c:%m' }
