@@ -1,21 +1,34 @@
+if vim.g.neovide then
+  vim.o.guifont = "BlexMono Nerd Font:h14"
+  vim.opt.linespace = 2
+  vim.g.neovide_padding_top = 2
+  vim.g.neovide_padding_bottom = 2
+  vim.g.neovide_padding_left = 2
+  vim.g.neovide_padding_right = 2
+  vim.g.neovide_cursor_animation_length = 0.02
+  vim.g.neovide_cursor_trail_size = 0.3
+end
+
 vim.loader.enable()
 
 vim.g.mapleader = ' '
 
-vim.o.laststatus = 0
-vim.o.showmode = false
+vim.o.laststatus = 2
+vim.o.showmode = true
 vim.o.ruler = false
-vim.o.shortmess = 'WIFsc'
+vim.o.shortmess = 'WIFscat'
+vim.o.messagesopt = 'hit-enter,history:500'
 
 vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
 vim.o.splitright = true
 
-vim.o.colorcolumn = '80'
-vim.o.textwidth = 79
-vim.o.wrap = false
+vim.o.colorcolumn = '120'
+vim.o.textwidth = 119
+vim.o.wrap = true
+vim.o.linebreak = true
+vim.o.showbreak = "+> "
 
-vim.o.foldcolumn = '1'
 vim.o.number = true
 vim.o.numberwidth = 1
 vim.o.relativenumber = true
@@ -33,13 +46,15 @@ vim.opt.listchars = {
   tab = '» ',
   trail = '·',
   nbsp = '␣',
+  precedes = '<',
+  extends = '>',
 }
 
 vim.o.pumheight = 10
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 vim.o.scrolloff = 3
-vim.o.sidescroll = 1
+vim.o.sidescroll = 5
 
 vim.o.title = true
 vim.o.titlestring = [[%{&modified?'● ':''}%{empty(expand('%:t'))?'nvim':expand('%:t')}]]
@@ -52,7 +67,7 @@ vim.o.ignorecase = true
 vim.o.inccommand = 'split'
 vim.o.smartcase = true
 
-vim.o.expandtab = false
+vim.o.expandtab = true
 vim.o.shiftround = true
 vim.o.shiftwidth = 4
 vim.o.smartindent = true
@@ -88,10 +103,14 @@ vim.opt.mouse = 'a'
 vim.opt.cursorline = true
 vim.opt.updatetime = 250
 
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 
 vim.o.grepprg = [[rg --glob "!.git" --no-heading --vimgrep --follow $*]]
 vim.opt.grepformat = vim.opt.grepformat ^ { '%f:%l:%c:%m' }
+
+vim.o.clipboard = "unnamedplus"
+
+vim.o.autoread = true
 
 if vim.fn.has 'mac' == 1 then
   vim.g.python3_host_prog = '/usr/local/bin/python3'
@@ -102,15 +121,15 @@ end
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
   vim
-    .system({
-      'git',
-      'clone',
-      '--filter=blob:none',
-      '--branch=stable',
-      'https://github.com/folke/lazy.nvim.git',
-      lazypath,
-    })
-    :wait()
+      .system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        '--branch=stable',
+        'https://github.com/folke/lazy.nvim.git',
+        lazypath,
+      })
+      :wait()
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -126,9 +145,6 @@ require('lazy').setup {
   },
   change_detection = {
     notify = false,
-  },
-  install = {
-    colorscheme = { 'melange' },
   },
 }
 

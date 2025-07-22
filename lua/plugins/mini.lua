@@ -7,9 +7,6 @@ local clue_setup = function()
       { mode = 'n', keys = '<Leader>' },
       { mode = 'x', keys = '<Leader>' },
 
-      -- Built-in completion
-      { mode = 'i', keys = '<C-x>' },
-
       -- `g` key
       { mode = 'n', keys = 'g' },
       { mode = 'x', keys = 'g' },
@@ -54,6 +51,13 @@ local clue_setup = function()
   }
 end
 
+local diff_setup = function()
+  local diff = require("mini.diff")
+  diff.setup({
+    source = diff.gen_source.none()
+  })
+end
+
 local miniplug = function()
   local enabled = {
     ai = true,
@@ -63,11 +67,9 @@ local miniplug = function()
     cursorword = true,
     hipatterns = true,
     icons = true,
-    jump = true,
-    jump2d = true,
     move = true,
     pairs = true,
-    surround = true,
+    diff = diff_setup,
   }
   local plugs = {}
   for k, v in pairs(enabled) do

@@ -21,8 +21,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.wo[win][0].foldmethod = 'expr'
         vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
       end
-      local blink_caps = require('blink.cmp').get_lsp_capabilities(client.capabilities, true)
-      client.capabilities = vim.tbl_deep_extend('keep', client.capabilities, blink_caps)
     end
   end,
 })
@@ -30,20 +28,33 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
 
 vim.lsp.config('*', {
-  root_markers = { '.git' },
+  workspace_required = true,
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
+  flags = {
+    debounce_text_changes = 150,
+  },
+  root_markers = {
+    '.git',
+    'Makefile',
+    'package.json',
+    'pyproject.toml',
+    'Cargo.toml',
+  },
 })
 
-vim.lsp.enable {
-  'basedpyright',
-  'clangd',
-  'jqls',
+vim.lsp.enable({
+  'based',
+  'bash',
+  'clang_d',
+  'jq_ls',
   'luals',
-  'marksman',
-  'ruff',
+  'mksman',
   'tapo',
+  'terrafrm',
+  'tsls',
   'vscode-cssls',
   'vscode-eslintls',
   'vscode-htmlls',
   'vscode-jsonls',
-  'yamlls',
-}
+  'yamls',
+})

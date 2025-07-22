@@ -2,30 +2,51 @@ return {
   {
     'folke/snacks.nvim',
     opts = {
+      animate = {},
+      bigfile = {},
       dim = {},
       indent = {},
+      notifier = { enabled = false },
+      notify = {},
       picker = {},
+      scratch = {},
+      scroll = {},
       terminal = {},
-      zen = {},
     },
     keys = {
-      -- Terminal
+      -- explorer
       {
-        '<c-\\>',
+        '<C-x>',
         function()
-          Snacks.terminal.toggle()
+          Snacks.explorer()
         end,
+        desc = "Explorer"
+      },
+      -- scratch
+      {
+        '<leader>,',
+        function()
+          Snacks.scratch()
+        end,
+        desc = 'Toggle scratch'
+      },
+      {
+        '<leader>S',
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = 'Select scratch buffer'
       },
       -- Top Pickers
       {
-        '<leader><space>',
+        '<leader><leader>',
         function()
-          Snacks.picker.smart()
+          Snacks.picker.files()
         end,
-        desc = 'smart find files',
+        desc = 'find files',
       },
       {
-        '<leader>',
+        '<leader>.',
         function()
           Snacks.picker.buffers()
         end,
@@ -196,13 +217,6 @@ return {
           Snacks.picker.autocmds()
         end,
         desc = 'autocmds',
-      },
-      {
-        '<leader>sb',
-        function()
-          Snacks.picker.lines()
-        end,
-        desc = 'buffer lines',
       },
       {
         '<leader>sc',

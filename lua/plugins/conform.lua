@@ -1,7 +1,6 @@
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
       {
@@ -14,6 +13,7 @@ return {
       },
     },
     opts = {
+      log_level = vim.log.levels.DEBUG,
       notify_on_error = false,
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
@@ -30,7 +30,9 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'ruff', 'ruff_format' },
+        python = { 'black' },
+        markdown = { 'prettier' },
+        sql = { 'sqlfluff' },
       },
     },
   },

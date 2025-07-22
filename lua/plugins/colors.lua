@@ -1,22 +1,33 @@
 return {
   {
-    'savq/melange-nvim',
-    dependencies = {
-      'rktjmp/lush.nvim',
-    },
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
-    lazy = false,
     config = function()
-      vim.opt.termguicolors = true
-
-      local function melange_no_variants()
-        vim.g.melange_enable_font_variants = 0
-        require 'lush'
-        require('melange.build').build()
-      end
-
-      melange_no_variants()
-      vim.cmd.colorscheme 'melange'
-    end,
-  },
+      require("catppuccin").setup({
+        transparent_background = true,
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          treesitter = true,
+          mini = {
+            enabled = true,
+            indentscope_color = "",
+          },
+          blink_cmp = true,
+          diffview = true,
+          leap = true,
+          markdown = true,
+          neogit = true,
+          copilot_vim = true,
+          nvim_surround = true,
+          snacks = {
+            enabled = true,
+            indent_scope_color = "",
+          },
+        }
+      })
+      vim.cmd.colorscheme("catppuccin")
+    end
+  }
 }

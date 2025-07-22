@@ -15,13 +15,17 @@ return {
         nerd_font_variant = 'mono',
       },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'markdown' },
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        per_filetype = {
+          sql = { 'snippets', 'dadbod', 'buffer' },
+        },
         providers = {
           markdown = {
             name = 'RenderMarkdown',
             module = 'render-markdown.integ.blink',
             fallbacks = { 'lsp' },
           },
+          dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
         },
       },
       completion = {
@@ -34,8 +38,14 @@ return {
         },
       },
       signature = {
-        enabled = false,
+        enabled = true,
       },
+      cmdline = {
+        keymap = {
+          ['<Tab>'] = { 'show', 'accept' },
+        },
+        completion = { menu = { auto_show = function(ctx) return vim.fn.getcmdtype() == '@' end } },
+      }
     },
     opts_extend = { 'sources.default' },
   },
