@@ -6,24 +6,26 @@ return {
     config = function()
       require("catppuccin").setup({
         transparent_background = true,
+        term_colors = true,
+        no_italic = true,
         integrations = {
-          cmp = true,
+          blink_cmp = {
+            style = 'bordered',
+          },
+          diffview = true,
           gitsigns = true,
-          treesitter = true,
+          gitgutter = true,
+          markdown = true,
           mini = {
             enabled = true,
-            indentscope_color = "",
+            indentscope_color = '',
           },
-          blink_cmp = true,
-          diffview = true,
-          leap = true,
-          markdown = true,
           neogit = true,
-          copilot_vim = true,
-          nvim_surround = true,
+          treesitter = true,
+          pounce = true,
           snacks = {
             enabled = true,
-            indent_scope_color = "",
+            indentscope_color = '',
           },
         }
       })

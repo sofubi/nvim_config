@@ -2,28 +2,39 @@ return {
   {
     'saghen/blink.cmp',
     dependencies = {
-      'rafamadriz/friendly-snippets',
-      'MeanderingProgrammer/render-markdown.nvim',
+      {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        build = 'make install_jsregexp',
+        config = function()
+          require('luasnip.loaders.from_snipmate').lazy_load()
+        end,
+      },
     },
-    version = '*',
+    version = '1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      keymap = { preset = 'default' },
+      keymap = {
+        preset = 'default',
+        ['<C-s>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      },
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = 'mono',
       },
+      snippets = { preset = 'luasnip' },
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
         per_filetype = {
           sql = { 'snippets', 'dadbod', 'buffer' },
         },
+        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
-          markdown = {
-            name = 'RenderMarkdown',
-            module = 'render-markdown.integ.blink',
-            fallbacks = { 'lsp' },
+          lazydev = {
+            name = 'LazyDev',
+            module = 'lazydev.integrations.blink',
+            score_offset = 100,
           },
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
         },

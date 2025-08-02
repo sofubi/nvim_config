@@ -1,18 +1,13 @@
 return {
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    ft = { 'markdown', 'codecompanion' },
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {
-      completions = {
-        lsp = {
-          enabled = true,
-        }
-      },
-      preset = 'obsidian',
-    },
+    'toppair/peek.nvim',
+    event = { 'VeryLazy' },
+    build = 'deno task --quiet build:fast',
+    config = function()
+      require('peek').setup()
+      vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+      vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+    end,
   },
   {
     "iamcco/markdown-preview.nvim",

@@ -1,17 +1,16 @@
 return {
   {
     'folke/snacks.nvim',
+    lazy = false,
+    priority = 1000,
     opts = {
       animate = {},
       bigfile = {},
-      dim = {},
       indent = {},
-      notifier = { enabled = false },
+      notifier = {},
       notify = {},
       picker = {},
-      scratch = {},
       scroll = {},
-      terminal = {},
     },
     keys = {
       -- explorer
@@ -46,7 +45,7 @@ return {
         desc = 'find files',
       },
       {
-        '<leader>.',
+        '<leader>,',
         function()
           Snacks.picker.buffers()
         end,
@@ -66,21 +65,7 @@ return {
         end,
         desc = 'command history',
       },
-      {
-        '<leader>n',
-        function()
-          Snacks.picker.notifications()
-        end,
-        desc = 'nofitication history',
-      },
       -- find
-      {
-        '<leader>fb',
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = 'buffers',
-      },
       {
         '<leader>fc',
         function()
@@ -101,13 +86,6 @@ return {
           Snacks.picker.git_files()
         end,
         desc = 'find git files',
-      },
-      {
-        '<leader>fp',
-        function()
-          Snacks.picker.projects()
-        end,
-        desc = 'projects',
       },
       {
         '<leader>fr',
@@ -143,7 +121,7 @@ return {
         function()
           Snacks.picker.git_status()
         end,
-        desc = 'git stats',
+        desc = 'git status',
       },
       {
         '<leader>gS',
@@ -247,39 +225,11 @@ return {
         desc = 'buffer diagnostics',
       },
       {
-        '<leader>sh',
-        function()
-          Snacks.picker.help()
-        end,
-        desc = 'help pages',
-      },
-      {
-        '<leader>sH',
-        function()
-          Snacks.picker.highlights()
-        end,
-        desc = 'highlights',
-      },
-      {
-        '<leader>si',
-        function()
-          Snacks.picker.icons()
-        end,
-        desc = 'icons',
-      },
-      {
         '<leader>sj',
         function()
           Snacks.picker.jumps()
         end,
         desc = 'jumps',
-      },
-      {
-        '<leader>sk',
-        function()
-          Snacks.picker.keymaps()
-        end,
-        desc = 'keymaps',
       },
       {
         '<leader>sl',
@@ -329,13 +279,6 @@ return {
           Snacks.picker.undo()
         end,
         desc = 'undo history',
-      },
-      {
-        '<leader>uC',
-        function()
-          Snacks.picker.colorschemes()
-        end,
-        desc = 'colorschemes',
       },
       -- LSP
       {

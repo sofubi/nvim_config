@@ -16,6 +16,10 @@ local tmap = function(lhs, rhs, opts)
   vim.keymap.set('t', lhs, rhs, opts)
 end
 
+local imap = function(lhs, rhs, opts)
+  vim.keymap.set('i', lhs, rhs, opts)
+end
+
 nmap('<leader>O', '[<Space>', { remap = true })
 nmap('<leader>o', ']<Space>', { remap = true })
 
@@ -33,9 +37,6 @@ nmap('<S-Down>', cmd 'resize -2')
 nmap('<S-Left>', cmd 'vertical resize +2')
 nmap('<S-Right>', cmd 'vertical resize -2')
 
--- use comma to switch windows
-nmap(',', '<c-w>')
-
 -- populate jumplist with relative jumps, otherwise move by wrapped line
 nmap('k', [[(v:count ? "m'" . v:count : "g") . "k"]], { expr = true })
 nmap('j', [[(v:count ? "m'" . v:count : "g") . "j"]], { expr = true })
@@ -52,7 +53,7 @@ tmap('<Esc><Esc>', '<C-\\><C-n>')
 -- clear search highlights
 nmap('<Esc>', '<cmd>nohlsearch<CR>')
 
--- move through splits
+-- split movement
 nmap('<C-h>', '<C-w>h')
 nmap('<C-j>', '<C-w>j')
 nmap('<C-k>', '<C-w>k')

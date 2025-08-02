@@ -1,8 +1,5 @@
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>ch', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -21,10 +18,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.wo[win][0].foldmethod = 'expr'
         vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
       end
+      if client:supports_method 'textDocument/formatting' then
+        -- Format the current buffer on save
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          buffer = args.buf,
+          callback = function()
+            vim.lsp.buf.format { bufnr = args.buf, id = client.id }
+          end,
+        })
+      end
     end
   end,
 })
-
 vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
 
 vim.lsp.config('*', {
@@ -42,13 +47,14 @@ vim.lsp.config('*', {
   },
 })
 
-vim.lsp.enable({
-  'based',
+vim.lsp.enable {
+  'basedpyrigh',
   'bash',
   'clang_d',
   'jq_ls',
   'luals',
   'mksman',
+  'rufff',
   'tapo',
   'terrafrm',
   'tsls',
@@ -57,4 +63,4 @@ vim.lsp.enable({
   'vscode-htmlls',
   'vscode-jsonls',
   'yamls',
-})
+}

@@ -7,7 +7,7 @@ return {
         python = { 'flake8' },
         sql = { 'sqlfluff' },
       }
-      vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufEnter', 'InsertEnter', 'InsertLeave' }, {
+      vim.api.nvim_create_autocmd({ 'InsertEnter', 'InsertLeave', 'BufEnter', 'BufWritePost', 'TextChanged', 'TextChangedI' }, {
         callback = function()
           require('lint').try_lint()
         end,
