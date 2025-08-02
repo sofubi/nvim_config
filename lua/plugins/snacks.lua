@@ -4,30 +4,25 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      dim = {},
+      animate = {},
+      bigfile = {},
       indent = {},
+      notifier = {},
+      notify = {},
       picker = {},
-      terminal = {},
-      zen = {},
+      scroll = {},
     },
     keys = {
-      -- Terminal
-      {
-        '<c-\\>',
-        function()
-          Snacks.terminal.toggle()
-        end,
-      },
       -- Top Pickers
       {
-        '<leader><space>',
+        '<leader><leader>',
         function()
           Snacks.picker.smart()
         end,
         desc = 'smart find files',
       },
       {
-        '<leader>',
+        '<leader>,',
         function()
           Snacks.picker.buffers()
         end,
@@ -47,21 +42,7 @@ return {
         end,
         desc = 'command history',
       },
-      {
-        '<leader>n',
-        function()
-          Snacks.picker.notifications()
-        end,
-        desc = 'nofitication history',
-      },
       -- find
-      {
-        '<leader>fb',
-        function()
-          Snacks.picker.buffers()
-        end,
-        desc = 'buffers',
-      },
       {
         '<leader>fc',
         function()
@@ -82,13 +63,6 @@ return {
           Snacks.picker.git_files()
         end,
         desc = 'find git files',
-      },
-      {
-        '<leader>fp',
-        function()
-          Snacks.picker.projects()
-        end,
-        desc = 'projects',
       },
       {
         '<leader>fr',
@@ -124,7 +98,7 @@ return {
         function()
           Snacks.picker.git_status()
         end,
-        desc = 'git stats',
+        desc = 'git status',
       },
       {
         '<leader>gS',
@@ -186,41 +160,6 @@ return {
         desc = 'registers',
       },
       {
-        '<leader>s/',
-        function()
-          Snacks.picker.search_history()
-        end,
-        desc = 'search history',
-      },
-      {
-        '<leader>sa',
-        function()
-          Snacks.picker.autocmds()
-        end,
-        desc = 'autocmds',
-      },
-      {
-        '<leader>sb',
-        function()
-          Snacks.picker.lines()
-        end,
-        desc = 'buffer lines',
-      },
-      {
-        '<leader>sc',
-        function()
-          Snacks.picker.command_history()
-        end,
-        desc = 'command history',
-      },
-      {
-        '<leader>sC',
-        function()
-          Snacks.picker.commands()
-        end,
-        desc = 'commands',
-      },
-      {
         '<leader>sd',
         function()
           Snacks.picker.diagnostics()
@@ -235,39 +174,11 @@ return {
         desc = 'buffer diagnostics',
       },
       {
-        '<leader>sh',
-        function()
-          Snacks.picker.help()
-        end,
-        desc = 'help pages',
-      },
-      {
-        '<leader>sH',
-        function()
-          Snacks.picker.highlights()
-        end,
-        desc = 'highlights',
-      },
-      {
-        '<leader>si',
-        function()
-          Snacks.picker.icons()
-        end,
-        desc = 'icons',
-      },
-      {
         '<leader>sj',
         function()
           Snacks.picker.jumps()
         end,
         desc = 'jumps',
-      },
-      {
-        '<leader>sk',
-        function()
-          Snacks.picker.keymaps()
-        end,
-        desc = 'keymaps',
       },
       {
         '<leader>sl',
@@ -317,13 +228,6 @@ return {
           Snacks.picker.undo()
         end,
         desc = 'undo history',
-      },
-      {
-        '<leader>uC',
-        function()
-          Snacks.picker.colorschemes()
-        end,
-        desc = 'colorschemes',
       },
       -- LSP
       {

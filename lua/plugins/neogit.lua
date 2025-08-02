@@ -1,10 +1,7 @@
 return {
   {
-    'sindrets/diffview.nvim',
-    cmd = 'DiffviewOpen',
-  },
-  {
     'NeogitOrg/neogit',
+    enabled = false,
     cmd = 'Neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',

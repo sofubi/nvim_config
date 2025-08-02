@@ -1,8 +1,5 @@
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-vim.keymap.set('n', '<leader>cF', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>ch', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -21,8 +18,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.wo[win][0].foldmethod = 'expr'
         vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
       end
+      if client:supports_method 'textDocument/formatting' then
+        -- Format the current buffer on save
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          buffer = args.buf,
+          callback = function()
+            vim.lsp.buf.format { bufnr = args.buf, id = client.id }
+          end,
+        })
+      end
       local blink_caps = require('blink.cmp').get_lsp_capabilities(client.capabilities, true)
-      client.capabilities = vim.tbl_deep_extend('keep', client.capabilities, blink_caps)
+      client.capabilities = vim.tbl_deep_extend('force', client.capabilities, blink_caps)
     end
   end,
 })
@@ -33,16 +39,17 @@ vim.lsp.config('*', {
 })
 
 vim.lsp.enable {
-  'basedpyright',
-  'clangd',
-  'jqls',
+  'basedpyrigh',
+  'clang_d',
+  'jq_ls',
   'luals',
-  'marksman',
-  'ruff',
+  'marksmand',
+  'rufff',
   'tapo',
+  'tsls',
   'vscode-cssls',
   'vscode-eslintls',
   'vscode-htmlls',
   'vscode-jsonls',
-  'yamlls',
+  'yamls',
 }

@@ -16,14 +16,11 @@ return {
           options = {
             on_telescope_result_callback = shorter_name,
             debug = true,
-            notify_user_on_venv_activation = true,
+            notify_user_on_venv_activation = false,
           },
           search = {
             code_venvs = {
               command = "fd '/bin/python$' ~/Code --full-path -IHL",
-            },
-            opp_venvs = {
-              command = "fd '/bin/python$' ~/Projects/venvs --full-path",
             },
           },
         },
@@ -33,5 +30,9 @@ return {
     keys = {
       { '<leader>cv', '<cmd>VenvSelect<cr>', ft = 'python', desc = 'select venv' },
     },
+  },
+  {
+    'cachebag/nvim-tcss',
+    config = true,
   },
 }

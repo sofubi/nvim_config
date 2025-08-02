@@ -2,10 +2,10 @@ vim.loader.enable()
 
 vim.g.mapleader = ' '
 
-vim.o.laststatus = 0
-vim.o.showmode = false
+vim.o.laststatus = 2
 vim.o.ruler = false
 vim.o.shortmess = 'WIFsc'
+vim.o.messagesopt = 'hit-enter,history:500'
 
 vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
@@ -14,8 +14,9 @@ vim.o.splitright = true
 vim.o.colorcolumn = '120'
 vim.o.textwidth = 119
 vim.o.wrap = false
+vim.o.linebreak = true
+vim.o.showbreak = '+> '
 
-vim.o.foldcolumn = '1'
 vim.o.number = true
 vim.o.numberwidth = 1
 vim.o.relativenumber = true
@@ -33,13 +34,15 @@ vim.opt.listchars = {
   tab = '» ',
   trail = '·',
   nbsp = '␣',
+  precedes = '<',
+  extends = '>',
 }
 
 vim.o.pumheight = 10
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
-vim.o.scrolloff = 3
-vim.o.sidescroll = 1
+vim.o.scrolloff = 10
+vim.o.sidescroll = 8
 
 vim.o.title = true
 vim.o.titlestring = [[%{&modified?'● ':''}%{empty(expand('%:t'))?'nvim':expand('%:t')}]]
@@ -59,12 +62,12 @@ vim.o.smartindent = true
 vim.o.softtabstop = -1
 vim.o.tabstop = 4
 
-vim.o.foldenable = true
+vim.o.foldenable = false
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldtext = ''
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldtext = 'nvim_treesitter#foldtext()'
+vim.o.foldcolumn = '0'
 
 vim.o.spell = true
 vim.o.spellsuggest = '10'
@@ -74,6 +77,7 @@ vim.o.autowrite = true
 vim.o.undofile = true
 vim.o.exrc = true
 vim.o.secure = true
+vim.o.swapfile = false
 
 vim.o.shellcmdflag = '-Nc'
 vim.o.timeoutlen = 600
@@ -81,7 +85,7 @@ vim.o.updatetime = 100
 vim.opt.suffixes = { '.swp', '.bak', '.pyc', '.out', '.aux', '.bbl', '.blg' }
 
 vim.o.concealcursor = 'nc'
-vim.o.conceallevel = 2
+vim.o.conceallevel = 0
 
 vim.opt.mouse = 'a'
 
@@ -95,24 +99,27 @@ vim.opt.grepformat = vim.opt.grepformat ^ { '%f:%l:%c:%m' }
 
 vim.o.clipboard = 'unnamedplus'
 
-if vim.fn.has 'mac' == 1 then
-  vim.g.python3_host_prog = '/usr/local/bin/python3'
-else
-  vim.g.python3_host_prog = '/usr/bin/python3'
-end
+vim.g.python3_host_prog = vim.fn.stdpath 'config' .. '/.venv/bin/python'
+vim.g.node_host_prog = vim.fn.expand '$FNM_DIR' .. '/aliases/nvim/bin/neovim-node-host'
+
+vim.filetype.add {
+  extension = {
+    njk = 'htmldjango',
+  },
+}
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
   vim
-    .system({
-      'git',
-      'clone',
-      '--filter=blob:none',
-      '--branch=stable',
-      'https://github.com/folke/lazy.nvim.git',
-      lazypath,
-    })
-    :wait()
+      .system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        '--branch=stable',
+        'https://github.com/folke/lazy.nvim.git',
+        lazypath,
+      })
+      :wait()
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -130,7 +137,7 @@ require('lazy').setup {
     notify = false,
   },
   install = {
-    colorscheme = { 'melange' },
+    colorscheme = { 'catppuccin' },
   },
 }
 
